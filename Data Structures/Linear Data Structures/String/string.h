@@ -1,100 +1,79 @@
-#ifndef TESTPROJECT_STRING_H
-#define TESTPROJECT_STRING_H
+#ifndef STRUCTURES_STRING_H
+#define STRUCTURES_STRING_H
 
 #include <iostream>
-#include <string.h>
+#include <cstring>
 #include <cassert>
-#include <csignal>
-using namespace std;
+
+#define INITIAL_CAPACITY 16
 
 class String {
 
-    char *_data;
-    unsigned long _length;
-    unsigned long _capacity;
+    char *_data = nullptr;
+    size_t _length = 0;
+    size_t _capacity = 0;
 
     /*------------- Help Functions ------------*/
 
-    void init(const char *, const size_t);
-
+    void init(const char *, size_t);
+    void assign(const char *, size_t);
     void move(String &);
+    void swap(String &);
+    void concat(const char *, size_t);
+    int compare(const char *);
 
-    void concat(const char *, unsigned long);
-
-    void concat(const String &);
 
 public:
 
     /* ----- Constructors ----- */
 
     String();
-
-    explicit String(char const *);
-
-    //Copy constructor...
-    String(String const &);
-
-    //Copy assignment operator...
-    String& operator=(const String &);
-
-    //Move constructor...
-    String(String &&) noexcept;
-
-    //Move assignment operator...
-    String& operator=(String &&) noexcept;
-
+    String(char const *);
+    String(String const &);                  //Copy constructor...
+    String(String &&) noexcept;              //Move constructor...
     ~String();
+
+    String& operator=(const String &);       //Copy assignment operator...
+    String& operator=(const char *);
+    String& operator=(String &&) noexcept;   //Move assignment operator...
 
 
     /*-------- Accessors ---------*/
 
-    char* data() const;
-
-    char operator[](unsigned);
+    const char * c_str() const;
+    const char & operator[](size_t) const;
+    const char & front() const;
+    const char & back() const;
 
 
     /* -------- Capacity -------- */
 
     bool empty() const;
-
     void clear();
-
-    unsigned long length() const;
-
-    unsigned long capacity() const;
-
+    size_t length() const;
+    size_t capacity() const;
     void reserve(size_t);
-
     void resize(size_t, char = '\0');
 
 
     /* ------- Modifiers ------- */
 
-    void swap(String &);
-
     void push_back(const char &);
-
-    void pop_back();
-
+    char pop_back();
     String& operator+=(const String &);
-
     String& operator+=(const char *);
 
 
     /*---------- Non-member function overloads -------------*/
 
+    friend void swap(String &, String &);
     friend String operator+(const  String &, const String &);
-
     friend String operator+(const String &, const char *);
-
     friend String operator+(const char *, const String &);
-
-    friend ostream& operator<<(ostream &, const String &);
-
-    friend istream& operator>>(istream &, String &);
-
+    friend std::ostream& operator<<(std::ostream &, const String &);
+    friend std::istream& operator>>(std::istream &, String &);
 
 };
 
-#endif //TESTPROJECT_STRING_H
+#endif //STRUCTURES_STRING_H
 

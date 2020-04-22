@@ -1,33 +1,38 @@
 #include "String.h"
 
-const int INITIAL_CAPACITY = 64;
-
 /* ----- Constructors ----- */
 
-String::String() : _data(new char[1]{'\0'}), _length(0), _capacity(1) {}
+String::String() {
+    reserve(INITIAL_CAPACITY);
+}
 
 String::String(const char *str) {
-   init(str,strlen(str));
+    init(str,strlen(str));
 }
 
 String::String(String const &other) {
     init(other._data,other._length);
 }
 
+String::String(String &&other) noexcept {
+    move(other);
+}
+
+String::~String() {
+    delete[] _data;
+}
+
+
 String& String::operator=(const String &other) {
     if(this != &other) {
-        if(other._length > _capacity) {
-            reserve(other._capacity);
-        }
-        _length = other._length;
-        strncpy(_data,other._data,_length);
+        assign(other.c_str(),other.length());
     }
     return *this;
 }
 
-String::String(String &&other) noexcept {
-    move(other);
-    other.clear();
+String& String::operator=(const char *str) {
+   assign(str,strlen(str));
+   return *this;
 }
 
 String& String::operator=(String &&other) noexcept {
@@ -39,57 +44,57 @@ String& String::operator=(String &&other) noexcept {
     return *this;
 }
 
-String::~String() {
-    delete[] _data;
-}
-
-
 /*-------- Accessors ---------*/
 
-char* String::data() const {
+const char * String::c_str() const {
     return _data;
 }
 
-char String::operator[](unsigned const index) {
-    if(index < 0 || index >= _length) raise(SIGSEGV);   //without check -> undefined behavior
+const char & String::operator[](size_t index) const {
+    if(index < 0 || index >= _length) throw;
     return *(_data + index);
+}
+
+const char & String::front() const {
+    return operator[](0);
+}
+
+const char & String::back() const {
+    return operator[](_length - 1);
 }
 
 
 /* -------- Capacity -------- */
 
 bool String::empty() const {
-    return _length == 0;
+    return (_length == 0);
 }
 
 void String::clear() {
     _data = nullptr;
     _length = 0;
+    _capacity = 0;
 }
 
-unsigned long String::length() const {
+size_t String::length() const {
     return _length;
 }
 
-unsigned long String::capacity() const {
+size_t String::capacity() const {
     return _capacity;
 }
 
 void String::reserve(size_t n) {
 
-    if(n > _capacity) {
-
-        char *temp = new char[n];
-
-        for (int i = 0; i < _length; i++) {
-            temp[i] = _data[i];
-        }
-
-        delete[] _data;
-
-        _data = temp;
-        _capacity = n;
+    if(n <= _capacity)
+        return;
+    char *temp = new char[n];
+    for (int i = 0; i < _length; i++) {
+        temp[i] = _data[i];
     }
+    delete[] _data;
+    _data = temp;
+    _capacity = n;
 }
 
 void String::resize(size_t new_size, char val) {
@@ -106,15 +111,9 @@ void String::resize(size_t new_size, char val) {
 
 /* ------- Modifiers ------- */
 
-void String::swap(String &object) {
-    String temp = *this;
-    *this = object;
-    object = temp;
-}
+void String::push_back(const char & val) {
 
-void String::push_back(const char &val) {
-
-    if(_capacity == 0) {
+    if(_capacity == 0 || !_data) {
         reserve(INITIAL_CAPACITY);
     }
     else if(_length == _capacity) {
@@ -124,14 +123,13 @@ void String::push_back(const char &val) {
     _data[_length++] = val;
 }
 
-void String::pop_back() {
-    if(_length == 0) return;
+char String::pop_back() {
+    if(_length == 0)
+        return '\0';
+    char c = _data[_length-1];
+    _data[_length-1] = '\0';
     _length--;
-}
-
-String& String::operator+=(const String &other) {
-    concat(other);
-    return *this;
+    return c;
 }
 
 String& String::operator+=(const char *str) {
@@ -139,20 +137,16 @@ String& String::operator+=(const char *str) {
     return *this;
 }
 
+String& String::operator+=(const String &other) {
+    concat(other.c_str(),other.length());
+    return *this;
+}
 
 
 /*---------- Non-member function overloads -----------*/
 
-ostream& operator<<(ostream &out, const String &str) {
-    out << str._data;
-    return out;
-}
-
-istream& operator>>(istream& in, String &str) {
-    delete[] str._data;
-    str._data = new char[str._capacity];
-    in.getline(str._data,str._capacity);
-    return in;
+void swap(String & S, String & T) {
+    S.swap(T);
 }
 
 String operator+(const String &object_1, const String &object_2) {
@@ -174,6 +168,23 @@ String operator+(const char *str, const String &object) {
     return temp;
 }
 
+std::ostream& operator<<(std::ostream & out, const String &str) {
+    out << str.c_str();
+    return out;
+}
+
+std::istream& operator>>(std::istream & in, String &str) {
+    str.clear();
+    char c;
+    do {
+        c = in.get();
+        if (c == '\n')
+            break;
+        str.push_back(c);
+    } while (true);
+
+    return in;
+}
 
 
 /*------------- Help Functions ------------*/
@@ -187,13 +198,29 @@ void String::init(const char *str, const size_t n) {
     _data[_length] = '\0';
 }
 
-void String::move(String &other) {
+void String::assign(const char *str, size_t n) {
+    if(n > _capacity) {
+        reserve(n + INITIAL_CAPACITY);
+    }
+    _length = n;
+    strncpy(_data,str,n);
+    _data[_length] = '\0';
+}
+
+void String::move(String & other) {
     _length = other._length;
     _capacity = other._capacity;
     _data = other._data;
+    other.clear();
 }
 
-void String::concat(char const *str, unsigned long n) {
+void String::swap(String & S) {
+    String T; T.move(*this);
+    (*this).move(S);
+    S.move(T);
+}
+
+void String::concat(char const *str, size_t n) {
     if(_capacity - _length < n) {
         reserve(n + INITIAL_CAPACITY);
     }
@@ -203,6 +230,7 @@ void String::concat(char const *str, unsigned long n) {
     }
 }
 
-void String::concat(const String &other) {
-    concat(other._data,other._length);
+int String::compare(const char *str) {
+    return strcmp(_data,str);
 }
+
