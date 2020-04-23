@@ -1,66 +1,25 @@
 #include "Vector.h"
 
-const int INITIAL_CAPACITY = 64;
-
 /* ----- Constructors ----- */
 
 template <typename T>
-Vector<T>::Vector() : _size(0), _capacity(0) {
-    _data = new T[_capacity];
+Vector<T>::Vector() {
+    reserve(INITIAL_CAPACITY);
 }
 
 template <typename T>
-Vector<T>::Vector(size_t n, T val) : _data(new T[n]), _size(n), _capacity(n) {
-    for(int i=0; i < _size; i++) {
-        _data[i] = val;
-    }
+Vector<T>::Vector(size_t n, T val) {
+    assign(n,val);
 }
 
 template <typename T>
 Vector<T>::Vector(const Vector &other) {
-    _size = other._size;
-    _capacity = other._capacity;
-    _data = new T[_capacity];
-    for(int i=0; i < _size; i++) {
-        _data[i] = other._data[i];
-    }
-}
-
-template <typename T>
-Vector<T>& Vector<T>::operator=(const Vector &other) {
-
-    if(this != &other) {
-        if(other._size > _capacity) {
-            reserve(other._capacity);
-        }
-        _size = other._size;
-        for (int i = 0; i < _size; i++) {
-            _data[i] = other._data[i];
-        }
-    }
-
-    return *this;
+    assign(other._data, other._size);
 }
 
 template <typename T>
 Vector<T>::Vector(Vector && other) noexcept {
-    _size = other._size;
-    _capacity = other._capacity;
-    _data = other._data;
-    other.clear();
-}
-
-template <typename T>
-Vector<T>& Vector<T>::operator=(Vector &&other) noexcept {
-
-    if(this != &other) {
-        delete[] _data;
-        _size = other._size;
-        _capacity = other._capacity;
-        _data = other._data;
-        other.clear();
-    }
-    return *this;
+    move(other);
 }
 
 template <typename T>
@@ -68,6 +27,25 @@ Vector<T>::~Vector() {
     delete[] _data;
 }
 
+
+
+template <typename T>
+Vector<T>& Vector<T>::operator=(const Vector & other) {
+    if(this != &other) {
+        assign(other._data,other._size);
+    }
+    return *this;
+}
+
+template <typename T>
+Vector<T>& Vector<T>::operator=(Vector && other) noexcept {
+
+    if(this != &other) {
+        delete[] _data;
+        move(other);
+    }
+    return *this;
+}
 
 /*-------- Accessors ---------*/
 
@@ -77,17 +55,35 @@ T* Vector<T>::data() const {
 }
 
 template <typename T>
-T& Vector<T>::operator[](unsigned index) {
-    if(index < 0 || index >= _size) raise(SIGSEGV);
-    return _data[index];
+const T& Vector<T>::operator[](size_t index) const{
+    if(index < 0 || index >= _size) throw std::out_of_range("Out of range exception");
+    return *(_data+index);
+}
+
+template<typename T>
+const char &Vector<T>::front() const {
+    return operator[](0);
+}
+
+template<typename T>
+const char &Vector<T>::back() const {
+    return operator[](_size - 1);
 }
 
 
 /* -------- Capacity -------- */
 
+
 template <typename T>
-size_t Vector<T>::size() const {
-    return _size;
+bool Vector<T>::empty() const {
+    return (_size == 0);
+}
+
+template <typename T>
+void Vector<T>::clear() {
+    _data = nullptr;
+    _size = 0;
+    _capacity = 0;
 }
 
 template <typename T>
@@ -96,59 +92,52 @@ size_t Vector<T>::capacity() const {
 }
 
 template <typename T>
+size_t Vector<T>::size() const {
+    return _size;
+}
+
+template <typename T>
 void Vector<T>::reserve(size_t n) {
-
-    if(n > _capacity) {
-
-        T *temp = new T[n];
-
+    if(n <= _capacity)
+        return;
+    T *temp = new T[n];
+    if(_data != nullptr) {
         for (int i = 0; i < _size; i++) {
             temp[i] = _data[i];
         }
-
         delete[] _data;
-
-        _data = temp;
-        _capacity = n;
     }
+    _data = temp;
+    _capacity = n;
 }
 
 template <typename T>
 void Vector<T>::resize(size_t new_size, T val) {
-    
+
     reserve(new_size);
-    
+
     for(size_t i = _size; i < new_size; i++) {
         _data[i] = val;
     }
     _size = new_size;
 }
 
-template <typename T>
-bool Vector<T>::empty() const {
-    return (_size == 0);
-}
 
 
 /* ----- Modifiers ----- */
 
-template <typename T>
-void Vector<T>::clear() {
-    _size = 0;
-    _data = nullptr;
-}
 
 template <typename T>
 void Vector<T>::swap(Vector &other) {
-    Vector<T> temp = *this;
-    *this = other;
-    other = temp;
+    Vector<T> temp; temp.move(*this);
+    (*this).move(other);
+    other.move(temp);
 }
 
 template <typename T>
 void Vector<T>::push_back(const T &val) {
 
-    if(_capacity == 0) {
+    if(_capacity == 0 || !_data) {
         reserve(INITIAL_CAPACITY);
     }
     else if(_size == _capacity) {
@@ -159,22 +148,41 @@ void Vector<T>::push_back(const T &val) {
 }
 
 template <typename T>
-void Vector<T>::pop_back() {
-    if(_size == 0) return;
+T Vector<T>::pop_back() {
+    if(_size == 0)
+        return '\0';
+    T c = _data[_size-1];
+    _data[_size-1] = '\0';
     _size--;
+    return c;
 }
 
 
 /*------ Help Functions -----*/
 
-template <typename T>
-void Vector<T>::copy(const Vector &other) {
-    _size = other._size;
-    _capacity = other._capacity;
-    _data = new T[_capacity];
-    for(int i=0; i < _size; i++) {
-        _data[i] = other._data[i];
+
+template<typename T>
+void Vector<T>::assign(size_t n, T val) {
+    _size = n;
+    reserve(_size);
+    for(int i=0; i<_size; i++) {
+        _data[i] = val;
     }
 }
 
+template <typename T>
+void Vector<T>::assign(T* data, size_t n) {
+    _size = n;
+    reserve(n);
+    for(int i=0; i<_size; i++) {
+        _data[i] = data[i];
+    }
+}
 
+template<typename T>
+void Vector<T>::move(Vector &other) const {
+    _size = other._size;
+    _capacity = other._capacity;
+    _data = other._data;
+    other.clear();
+}

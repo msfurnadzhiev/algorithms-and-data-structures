@@ -1,78 +1,59 @@
-#ifndef TESTPROJECT_VECTOR_H
-#define TESTPROJECT_VECTOR_H
+#ifndef STRUCTURES_VECTOR_H
+#define STRUCTURES_VECTOR_H
 #include <iostream>
 #include <cassert>
 #include <csignal>
 using namespace std;
 
+#define INITIAL_CAPACITY 64
 
 template <typename T>
 class Vector {
 
-    T* _data;
-    size_t _size;
-    size_t _capacity;
+    T* _data = nullptr;
+    size_t _size = 0;
+    size_t _capacity = 0;
 
-    void copy(const Vector &);
-
+    void assign(size_t, T = T());
+    void assign(T *, size_t);
+    void move(Vector &) const;
 public:
 
     /* ----- Constructors ----- */
 
     Vector();
-
-    explicit Vector(size_t, T = T());
-
-    //Copy constructor...
-    Vector(const Vector &);
-
-    //Copy assignment operator...
-    Vector& operator=(const Vector &);
-
-    //Move constructor...
-    Vector(Vector &&) noexcept;
-
-    //Move assignment operator...
-    Vector& operator=(Vector &&) noexcept;
-
+    Vector(size_t, T = T());
+    Vector(const Vector &);                 //Copy constructor...
+    Vector(Vector &&) noexcept;             //Move constructor...
     ~Vector();
 
+    Vector& operator=(const Vector &);      //Copy assignment operator...
+    Vector& operator=(Vector &&) noexcept;  //Move assignment operator...
 
     /*-------- Accessors ---------*/
 
     T* data() const;
-
-    T & operator[](unsigned);
+    const T & operator[](size_t) const;
+    const char & front() const;
+    const char & back() const;
 
 
     /* -------- Capacity -------- */
 
     bool empty() const;
-
+    void clear();
     size_t capacity() const;
-
     size_t size() const;
-
     void reserve(size_t n);
-
     void resize(size_t, T = T());
 
 
     /* ----- Modifiers ----- */
 
-    // Removes all elements from the Vector (capacity is not changed)
-    void clear();
-
     void push_back(const T&);
-
-    void pop_back();
-
+    T pop_back();
     void swap(Vector&);
-
-    //void erase();
-
 };
 
 
-#endif //TESTPROJECT_VECTOR_H
-
+#endif //STRUCTURES_VECTOR_H

@@ -7,11 +7,11 @@ String::String() {
 }
 
 String::String(const char *str) {
-    init(str,strlen(str));
+    assign(str,strlen(str));
 }
 
 String::String(String const &other) {
-    init(other._data,other._length);
+    assign(other._data,other._length);
 }
 
 String::String(String &&other) noexcept {
@@ -39,7 +39,6 @@ String& String::operator=(String &&other) noexcept {
     if(this != &other) {
         delete[] _data;
         move(other);
-        other.clear();
     }
     return *this;
 }
@@ -51,7 +50,7 @@ const char * String::c_str() const {
 }
 
 const char & String::operator[](size_t index) const {
-    if(index < 0 || index >= _length) throw;
+    if(index < 0 || index >= _length) throw std::out_of_range("Out of range exception");
     return *(_data + index);
 }
 
@@ -62,7 +61,6 @@ const char & String::front() const {
 const char & String::back() const {
     return operator[](_length - 1);
 }
-
 
 /* -------- Capacity -------- */
 
@@ -85,14 +83,15 @@ size_t String::capacity() const {
 }
 
 void String::reserve(size_t n) {
-
     if(n <= _capacity)
         return;
     char *temp = new char[n];
-    for (int i = 0; i < _length; i++) {
-        temp[i] = _data[i];
+    if(_data != nullptr) {
+        for (int i = 0; i < _length; i++) {
+            temp[i] = _data[i];
+        }
+        delete[] _data;
     }
-    delete[] _data;
     _data = temp;
     _capacity = n;
 }
@@ -189,20 +188,9 @@ std::istream& operator>>(std::istream & in, String &str) {
 
 /*------------- Help Functions ------------*/
 
-void String::init(const char *str, const size_t n) {
+void String::assign(const char *str, const size_t n) {
     _length = n;
-    _capacity = n + INITIAL_CAPACITY;
-    _data = new char[_capacity];
-    assert(_data != nullptr);
-    strncpy(_data,str,_length);
-    _data[_length] = '\0';
-}
-
-void String::assign(const char *str, size_t n) {
-    if(n > _capacity) {
-        reserve(n + INITIAL_CAPACITY);
-    }
-    _length = n;
+    reserve(n + INITIAL_CAPACITY);
     strncpy(_data,str,n);
     _data[_length] = '\0';
 }
@@ -224,13 +212,13 @@ void String::concat(char const *str, size_t n) {
     if(_capacity - _length < n) {
         reserve(n + INITIAL_CAPACITY);
     }
-    _length += n;
     for(int i=0; i < n; i++) {
         _data[_length + i] = str[i];
     }
+    _length += n;
+    _data[_length] = '\0';
 }
 
 int String::compare(const char *str) {
     return strcmp(_data,str);
 }
-

@@ -15,7 +15,6 @@ class String {
 
     /*------------- Help Functions ------------*/
 
-    void init(const char *, size_t);
     void assign(const char *, size_t);
     void move(String &);
     void swap(String &);
@@ -45,13 +44,12 @@ public:
     const char & front() const;
     const char & back() const;
 
-
     /* -------- Capacity -------- */
 
     bool empty() const;
     void clear();
-    size_t length() const;
     size_t capacity() const;
+    size_t length() const;
     void reserve(size_t);
     void resize(size_t, char = '\0');
 
@@ -76,4 +74,3 @@ public:
 };
 
 #endif //STRUCTURES_STRING_H
-
