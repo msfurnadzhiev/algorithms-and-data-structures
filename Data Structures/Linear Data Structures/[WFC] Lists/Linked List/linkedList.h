@@ -1,7 +1,6 @@
 #ifndef LINKEDLIST_LINKEDLIST_H
 #define LINKEDLIST_LINKEDLIST_H
 
-//a cell from linked list structure
 template <typename T>
 struct Node {
     T data;

@@ -33,9 +33,9 @@ public:
     /*-------- Accessors ---------*/
 
     T* data() const;
-    const T & operator[](size_t) const;
-    const char & front() const;
-    const char & back() const;
+    T & operator[](size_t) const;
+    char & front() const;
+    char & back() const;
 
 
     /* -------- Capacity -------- */

@@ -45,20 +45,20 @@ String& String::operator=(String &&other) noexcept {
 
 /*-------- Accessors ---------*/
 
-const char * String::c_str() const {
+char * String::c_str() const {
     return _data;
 }
 
-const char & String::operator[](size_t index) const {
+char & String::operator[](size_t index) const {
     if(index < 0 || index >= _length) throw std::out_of_range("Out of range exception");
     return *(_data + index);
 }
 
-const char & String::front() const {
+char & String::front() const {
     return operator[](0);
 }
 
-const char & String::back() const {
+char & String::back() const {
     return operator[](_length - 1);
 }
 
@@ -92,6 +92,7 @@ void String::reserve(size_t n) {
         }
         delete[] _data;
     }
+    temp[_length] = '\0';
     _data = temp;
     _capacity = n;
 }
@@ -120,6 +121,7 @@ void String::push_back(const char & val) {
     }
 
     _data[_length++] = val;
+    _data[_length] = '\0';
 }
 
 char String::pop_back() {
@@ -182,6 +184,8 @@ std::istream& operator>>(std::istream & in, String &str) {
         str.push_back(c);
     } while (true);
 
+    str.push_back('\0');
+    
     return in;
 }
 

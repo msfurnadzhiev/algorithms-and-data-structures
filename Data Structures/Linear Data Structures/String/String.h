@@ -39,10 +39,10 @@ public:
 
     /*-------- Accessors ---------*/
 
-    const char * c_str() const;
-    const char & operator[](size_t) const;
-    const char & front() const;
-    const char & back() const;
+    char * c_str() const;
+    char & operator[](size_t) const;
+    char & front() const;
+    char & back() const;
 
     /* -------- Capacity -------- */
 

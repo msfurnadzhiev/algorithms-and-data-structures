@@ -55,18 +55,18 @@ T* Vector<T>::data() const {
 }
 
 template <typename T>
-const T& Vector<T>::operator[](size_t index) const{
+T& Vector<T>::operator[](size_t index) const{
     if(index < 0 || index >= _size) throw std::out_of_range("Out of range exception");
     return *(_data+index);
 }
 
 template<typename T>
-const char &Vector<T>::front() const {
+T &Vector<T>::front() const {
     return operator[](0);
 }
 
 template<typename T>
-const char &Vector<T>::back() const {
+T &Vector<T>::back() const {
     return operator[](_size - 1);
 }
 
@@ -150,9 +150,9 @@ void Vector<T>::push_back(const T &val) {
 template <typename T>
 T Vector<T>::pop_back() {
     if(_size == 0)
-        return '\0';
+        return T();
     T c = _data[_size-1];
-    _data[_size-1] = '\0';
+    _data[_size-1] = T();
     _size--;
     return c;
 }

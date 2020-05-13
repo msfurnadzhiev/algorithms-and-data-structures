@@ -21,13 +21,17 @@ void HEAPIFY(T* array, int n, int index) {
 }
 
 template <typename T>
-void HEAP_SORT(T* array, int n) {
+void HEAPSORT(T* A, int n) {
+
+    //build max-heap
     for(int i=n/2-1; i>=0; i--) {
-        HEAPIFY(array,n,i);
+        HEAPIFY(A,n,i);
     }
+
+    //heapsort
     for(int i=n-1; i>=0; i--) {
-        swap(array[0],array[i]);
-        HEAPIFY(array,i,0);
+        swap(A[0],A[i]);
+        HEAPIFY(A,i,0);
     }
 }
 
