@@ -1,5 +1,5 @@
 ## Catalog
-##### Searching algorithms
+### Searching algorithms
 *  Naïve search
 *  Binary search
 *  Search in text
