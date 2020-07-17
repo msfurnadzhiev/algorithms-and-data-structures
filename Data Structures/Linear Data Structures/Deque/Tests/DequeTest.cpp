@@ -143,8 +143,8 @@ TEST(DequeTest, ElementAt) {
     EXPECT_THROW(A.at(0), std::out_of_range);
     EXPECT_THROW(A.at(-1), std::out_of_range);
     EXPECT_THROW(A.at(A.size()), std::out_of_range);
-    EXPECT_THROW(A.back(), std::out_of_range);
-    EXPECT_THROW(A.front(), std::out_of_range);
+    EXPECT_THROW(A.back(), std::logic_error);
+    EXPECT_THROW(A.front(), std::logic_error);
 
     for(size_t i=0; i < INITIAL_CAPACITY; i++) {
         A.push_back(i);

@@ -11,171 +11,192 @@ Deque::Deque(size_t n) {
     reserve(n);
 }
 
-Deque::Deque(const Deque &other) {
-    copy(other);
+Deque::Deque(const Deque & source) {
+    copy(source);
 }
 
-Deque & Deque::operator=(const Deque &other) {
-    if(this != &other){
-        copy(other);
+Deque & Deque::operator=(const Deque & source) {
+    if(this != &source){
+        copy(source);
     }
     return *this;
 }
 
-Deque::~Deque() {
+Deque::~Deque() noexcept {
     erase();
 }
 
 
 /* --------- Capacity --------- */
 
-bool Deque::empty() const {
-    return _size == 0;
+bool Deque::empty() const noexcept{
+    return m_size == 0;
 }
 
-size_t Deque::size() const {
-    return _size;
+size_t Deque::size() const noexcept {
+    return m_size;
 }
 
-size_t Deque::capacity() const {
-    return _capacity;
+size_t Deque::capacity() const noexcept {
+    return m_capacity;
 }
 
 void Deque::reserve(size_t n) {
 
-    if(n <= _capacity) return;
+    if(n <= m_capacity) return;
 
     //if buffer == nullptr then new throw std::bad_alloc()
-    double *buffer = new double[n];
+    double * buffer = new double[n];
 
-    size_t buffer_front = (n - _size) / 2;
+    size_t buffer_front = (n - m_size) / 2;
 
-    for(size_t i = 0; i < _size; i++) {
-        buffer[buffer_front + i] = _container[ _front + i];
+    for(size_t i = 0; i < m_size; i++) {
+        buffer[buffer_front + i] = m_container[ m_front + i];
     }
 
-    delete[] _container;
-    _container = buffer;
-    _capacity = n;
-    _front = buffer_front;
+    delete[] m_container;
+    m_container = buffer;
+    m_capacity = n;
+    m_front = buffer_front;
 }
 
 
 /* --------- Element access --------- */
 
-double & Deque::operator[](const size_t index) {
-    return _container[_front + index];
+double & Deque::operator[](const size_t index) noexcept {
+    return m_container[m_front + index];
 }
 
-const double & Deque::operator[](const size_t index) const {
-    return _container[_front + index];
+const double & Deque::operator[](const size_t index) const noexcept{
+    return m_container[m_front + index];
 }
 
 double & Deque::at(const size_t index) {
-    if(index < 0 || index >= _size)
+    if(index < 0 || index >= m_size)
         throw std::out_of_range("Deque::at() : index out of range");
-    return _container[_front + index];
+    return m_container[m_front + index];
 }
 
 const double & Deque::at(const size_t index) const {
     return const_cast<Deque*>(this)->at(index);
 }
 
-double & Deque::front() const {
+double & Deque::front() {
     if(empty())
-        throw std::out_of_range("Deque::front() : deque is empty!");
-    return _container[_front];
+        throw std::logic_error("Deque::front() : deque is empty!");
+    return m_container[m_front];
 }
 
-double & Deque::back() const {
+const double & Deque::front() const {
     if(empty())
-        throw std::out_of_range("Deque::front() : deque is empty!");
-    return _container[_front + _size - 1];
+        throw std::logic_error("Deque::front() : deque is empty!");
+    return m_container[m_front];
 }
 
-double * Deque::data() const {
-    return (_container + _front);
+double & Deque::back() {
+    if(empty())
+        throw std::logic_error("Deque::front() : deque is empty!");
+    return m_container[m_front + m_size - 1];
+}
+
+const double & Deque::back() const {
+    if(empty())
+        throw std::logic_error("Deque::front() : deque is empty!");
+    return m_container[m_front + m_size - 1];
+}
+
+double * Deque::data() noexcept {
+    return (m_container + m_front);
+}
+
+const double * Deque::data() const noexcept {
+    return (m_container + m_front);
 }
 
 
 /* --------- Modifiers --------- */
 
 void Deque::push_back(double value) {
-    if(!_container) {
+    if(!m_container) {
         reserve(INITIAL_CAPACITY);
     }
-    else if((_front + _size) == _capacity) {
-        reserve(_capacity * EXPANSION_FACTOR);
+    else if((m_front + m_size) == m_capacity) {
+        reserve(m_capacity * EXPANSION_FACTOR);
     }
-    _container[_front + _size] = value;
-    _size++;
+    m_container[m_front + m_size] = value;
+    m_size++;
 }
 
 void Deque::push_front(double value) {
-    if(_capacity == 0) {
+    if(m_capacity == 0) {
         reserve(INITIAL_CAPACITY);
     }
-    else if(_front == 0) {
-        reserve(_capacity * EXPANSION_FACTOR);
+    else if(m_front == 0) {
+        reserve(m_capacity * EXPANSION_FACTOR);
     }
-    _container[--_front] = value;
-    _size++;
+    m_container[--m_front] = value;
+    m_size++;
 }
 
+//if deque is empty return exception
 void Deque::pop_back() {
-    if(_size == 0) {
+    if(empty()) {
         return;
     }
-    _size--;
+    m_size--;
 }
 
 void Deque::pop_front() {
-    _size--;
-    _front++;
+    if(empty()) {
+        return;
+    }
+    m_size--;
+    m_front++;
 }
 
-void Deque::clear(bool erase_flag) {
+void Deque::clear(bool erase_flag) noexcept {
     if(erase_flag) {
         erase();
-        _container = nullptr;
-        _capacity = 0;
+        m_container = nullptr;
+        m_capacity = 0;
     }
-    _front = _capacity/2;
-    _size = 0;
+    m_front = m_capacity/2;
+    m_size = 0;
 }
 
 
 /* --------- Comparisons --------- */
 
-bool operator==(const Deque &deque1, const Deque &deque2) {
-    if(deque1._size != deque2._size) {
+bool operator==(const Deque & alpha, const Deque & beta) noexcept {
+    if(alpha.m_size != beta.m_size) {
         return false;
     }
-    for(int i=0; i< deque1._size; i++) {
-        if(deque1[i] != deque2[i]) {
+    for(int i=0; i< alpha.m_size; i++) {
+        if(alpha[i] != beta[i]) {
             return false;
         }
     }
     return true;
 }
 
-bool operator!=(const Deque &deque1, const Deque &deque2) {
-    return !(deque1 == deque2);
+bool operator!=(const Deque & alpha, const Deque & beta) noexcept {
+    return !(alpha == beta);
 }
+
 
 /* --------- Help Functions --------- */
 
-void Deque::copy(const Deque &other) {
-    if(_capacity < other._capacity) {
-        reserve(other._capacity);
+void Deque::copy(const Deque & source) {
+    if(m_capacity < source.m_capacity) {
+        reserve(source.m_capacity);
     }
-    _size = other._size;
-    _front = other._front;
-    for(int i=0; i<_size; i++) {
-        _container[_front + i] = other._container[_front + i];
+    m_size = source.m_size;
+    m_front = source.m_front;
+    for(int i=0; i<m_size; i++) {
+        m_container[m_front + i] = source.m_container[m_front + i];
     }
 }
 
-void Deque::erase() {
-    delete[] _container;
+void Deque::erase() noexcept {
+    delete[] m_container;
 }

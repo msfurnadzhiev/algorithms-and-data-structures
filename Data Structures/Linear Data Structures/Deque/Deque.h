@@ -6,167 +6,180 @@ static const size_t EXPANSION_FACTOR = 2;
 
 class Deque {
 
-    double *_container = nullptr; //allocated memory
-    size_t _capacity = 0;
-    size_t _size = 0;
-    size_t _front = 0;
+  double * m_container = nullptr;
+  size_t   m_capacity = 0;
+  size_t   m_size = 0;
+  size_t   m_front = 0;
 
-public:
+ public:
 
-    /* --------- Constructors --------- */
+  /* --------- Constructors --------- */
 
-    /**
-     * Default constructor
-     * @see void reserve(size_t n);
-     */
-    Deque();
+  /**
+   * Default constructor
+   * @see void reserve(size_t n);
+   */
+  Deque();
 
-    /**
-     * Constructor with parameter
-     * @param n The memory that will be allocated
-     * @see void reserve(size_t n);
-     */
-    explicit Deque(size_t n);
+  /**
+   * Constructor with parameter
+   * @param n The memory that will be allocated
+   * @see void reserve(size_t n);
+   */
+  explicit Deque(size_t n);
 
-    /**
-     * Copy constructor
-     * @see void copy(Deque& other);
-     */
-    Deque(const Deque &other);
+  /**
+   * Copy constructor
+   * @param source Reference to deque whose data will be copied
+   * @see void copy(Deque& other);
+   */
+  Deque(const Deque & source);
 
-    /**
-     * Copy assignment constructor
-     * @see void copy(Deque& other);
-     */
-    Deque & operator=(const Deque &other);
+  /**
+   * Copy assignment constructor
+   * @param source Reference to deque whose data will be copied
+   * @see void copy(Deque& other);
+   */
+  Deque & operator=(const Deque & source);
 
-    //TODO move constructor
-    //TODO move assignment operator
+  //TODO move constructor
+  //Deque(Deque &&other);
 
-    /**
-     * Destructor
-     * @see void erase();
-     */
-    ~Deque();
+  //TODO move assignment operator
+  //Deque & operator=(Deque &&other);
 
-    /* --------- Capacity --------- */
-
-    /**
-     * @return true if deque is empty else false
-     */
-    bool empty() const;
-
-    /**
-     * @return the number of elements of the deque
-     */
-    size_t size() const;
-
-    /**
-     * @return the size of allocated storage capacity
-     */
-    size_t capacity() const;
-
-    /**
-     * Requests that the deque capacity be at least enough to contain n elements.
-     * If n is greater than the current vector capacity, the function causes
-     * the container to reallocate its storage increasing its capacity to n.
-     * In all other cases, the function call does not cause a reallocation
-     * and the vector capacity is not affected.
-     * This function has no effect on the vector size and cannot alter its elements.
-     * This function satisfies the strong exception safety guarantee.
-     * @param n Minimum capacity for the deque
-     */
-    void reserve(size_t n);
+  /**
+   * Destructor
+   * @see void erase();
+   */
+  ~Deque() noexcept;
 
 
+  /* --------- Capacity --------- */
 
-    /* --------- Element access --------- */
+  /**
+   * @return true if deque is empty else false
+   */
+  bool empty() const noexcept;
 
-    /**
-     * Access element without checking if index is out of range
-     * Accessing out of range element causes undefined behavior
-     * @param index The index whose value we want to get
-     */
-    double & operator[](size_t index);
-    const double & operator[](size_t index) const;
+  /**
+   * @return the number of elements of the deque
+   */
+  size_t size() const noexcept;
 
-    /**
-     * Access element with checking if index is out of range
-     * @param index The index whose value we want to get
-     * @throw std::out_of_range
-     */
-    double & at(size_t index);
-    const double & at(size_t index) const;
+  /**
+   * @return the size of allocated storage capacity
+   */
+  size_t capacity() const noexcept;
 
-    /**
-     * @return a reference to the first element in the deque
-     * @throw std::out_of_range if deque is empty
-     */
-    double & front() const;
+  /**
+   * Requests that the deque capacity be at least enough to contain n elements.
+   * If n is greater than the current vector capacity, the function causes
+   * the container to reallocate its storage increasing its capacity to n.
+   * In all other cases, the function call does not cause a reallocation
+   * and the vector capacity is not affected.
+   * This function has no effect on the deque size and cannot alter its elements.
+   * This function satisfies the strong exception safety guarantee.
+   * @param n Minimum capacity for the deque
+   * @throw std::bad_alloc
+   */
+  void reserve(size_t n);
 
-    /**
-     * @return a reference to the last element in the deque
-     * @throw std::out_of_range if deque is empty
-     */
-    double & back() const;
 
-    /**
-     * @return a pointer to the fist element in the deque
-     */
-    double * data() const;
 
-    /* --------- Modifiers --------- */
+  /* --------- Element access --------- */
 
-    /**
-     * Adds a new element at the end of the deque.
-     * @param value The content of parameter is copied to the new element.
-     */
-    void push_back(double value);
+  /**
+   * Access element without checking if index is out of range
+   * Accessing out of range element causes undefined behavior
+   * @param index The index whose value we want to get
+   */
+  double & operator[](size_t index) noexcept;
+  const double & operator[](size_t index) const noexcept;
 
-    /**
-    * Adds a new element at the beginning of the deque.
-    * @param value The content of parameter is copied to the new element.
-    */
-    void push_front(double value);
+  /**
+   * Access element with checking if index is out of range
+   *
+   * @param index The index whose value we want to get
+   * @throw std::out_of_range
+   */
+  double & at(size_t index);
+  const double & at(size_t index) const;
 
-    /**
-     * Remove the last element in the deque.
-     */
-    void pop_back();
+  /**
+   * @return a reference to the first element in the deque
+   * @throw std::logic_error if deque is empty
+   */
+  double & front();
+  const double & front() const;
 
-    /**
-    * Remove the last element in the deque.
-    */
-    void pop_front();
+  /**
+   * @return a reference to the last element in the deque
+   * @throw std::logic_error if deque is empty
+   */
+  double & back();
+  const double & back() const;
 
-    /**
-     * Remove all elements from the deque.
-     * @param erase_flag If is true, the container will be erased
-     */
-    void clear(bool erase_flag = false);
+  /**
+   * @return a pointer to the fist element in the deque
+   */
+  double * data() noexcept;
+  const double * data() const noexcept;
 
-    /* --------- Comparisons --------- */
+  /* --------- Modifiers --------- */
 
-    /**
-     * The equality operator first comparing sizes, and if they match,
-     * the elements are compared sequentially.
-     */
-    friend bool operator==(const Deque &deque1, const Deque &deque2);
-    friend bool operator!=(const Deque &deque1, const Deque &deque2);
+  /**
+   * Adds a new element at the end of the deque.
+   * @param value The content of parameter is copied to the new element.
+   */
+  void push_back(double value);
 
-private:
+  /**
+  * Adds a new element at the beginning of the deque.
+  * @param value The content of parameter is copied to the new element.
+  */
+  void push_front(double value);
 
-    /* --------- Help Functions --------- */
-    /**
-     *  Copy each of the elements in other deque.
-     *  If necessary, construct a container with larger capacity.
-     *  This function satisfies the strong exception safety guarantee.
-     */
-    void copy(const Deque & other);
+  /**
+   * Remove the last element in the deque.
+   */
+  void pop_back();
 
-    /**
-     * Destroys the container object.
-     */
-    void erase();
+  /**
+  * Remove the last element in the deque.
+  */
+  void pop_front();
 
+  /**
+   * Remove all elements from the deque.
+   * @param erase_flag If is true, the container will be erased
+   */
+  void clear(bool erase_flag = false) noexcept;
+
+
+  /* --------- Comparisons --------- */
+
+  /**
+   * The equality operator first comparing sizes, and if they match,
+   * the elements are compared sequentially.
+   */
+  friend bool operator==(const Deque & alpha, const Deque & beta) noexcept;
+  friend bool operator!=(const Deque & alpha, const Deque & beta) noexcept;
+
+ private:
+
+  /* --------- Help Functions --------- */
+
+  /**
+   *  Copy each of the elements in other deque.
+   *  If necessary, construct a container with larger capacity.
+   *  This function satisfies the strong exception safety guarantee.
+   *  @param source Reference to deque whose data will be copied
+   */
+  void copy(const Deque & source);
+
+  /**
+   * Destroys the container object.
+   */
+  void erase() noexcept;
 };
