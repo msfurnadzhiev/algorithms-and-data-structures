@@ -26,7 +26,7 @@
     - [Kruskal's algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/[WIP]%20KRUSKAL.cpp) [WIP]
 
 - #### Cryptography algorithms
-    - [Rivest–Shamir–Adleman (RSA) cryptosystem]()
+    - [Rivest–Shamir–Adleman (RSA) cryptosystem](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Cryptography%20Algorithms/RSA.py)
 
 - #### Geometric algorithms
-    - [Welzl's algorithm (smallest-circle problem)]()
+    - [Welzl's algorithm (smallest-circle problem)](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Geometric%20Algorithms/WelzlAlgorithm.h)
