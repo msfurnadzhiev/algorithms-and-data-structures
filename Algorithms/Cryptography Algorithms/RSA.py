@@ -104,24 +104,26 @@ def decryption(ciphertext, secret_key, block_size = 3):
 
 # Example
 
-message = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum."""
+if __name__ == '__main__':
+	
+	message = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+	Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
+	dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum."""
 
-p = 569
-q = 571
-# n = 324899
+	p = 569
+	q = 571
+	# n = 324899
 
-publick_key = generate_publick_key(p,q)
-secret_key = generate_secret_key(p,q, publick_key[1])
+	publick_key = generate_publick_key(p,q)
+	secret_key = generate_secret_key(p,q, publick_key[1])
 
-block_size = 2
+	block_size = 2
 
-ciphertext = encryption(message, publick_key, block_size) 
-plaintext = decryption(ciphertext, secret_key, block_size)
+	ciphertext = encryption(message, publick_key, block_size) 
+	plaintext = decryption(ciphertext, secret_key, block_size)
 
-print(plaintext + "\n")
-print(ciphertext + "\n")
+	print(plaintext + "\n")
+	print(ciphertext + "\n")
 
 
