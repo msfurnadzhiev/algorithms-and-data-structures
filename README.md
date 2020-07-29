@@ -29,4 +29,4 @@
     - [Rivest–Shamir–Adleman (RSA) cryptosystem](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Cryptography%20Algorithms/RSA.py)
 
 - #### Geometric algorithms
-    - [Welzl's algorithm (smallest-circle problem)](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Geometric%20Algorithms/WelzlAlgorithm.h)
+    - [Welzl's algorithm (smallest-circle problem)](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Geometric%20Algorithms/WelzlAlgorithm.cpp)
