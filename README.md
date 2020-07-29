@@ -10,6 +10,7 @@
     - [Shell sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/SHELL_SORT.cpp)
     - [Counting sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/COUNTING_SORT.cpp)
     - [Bucket sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/BUCKET_SORT.cpp)
+    - [External Sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/[WIP] External Sort)[WIP]
 - #### Searching algorithms
 - #### Graph algorithms
 - #### Cryptography algorithms
