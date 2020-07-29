@@ -10,8 +10,23 @@
     - [Shell sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/SHELL_SORT.cpp)
     - [Counting sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/COUNTING_SORT.cpp)
     - [Bucket sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/BUCKET_SORT.cpp)
-    - [External Sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/[WIP] External Sort)[WIP]
+    - [External Sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/[WIP]%20External%20Sort) [WIP]
+
 - #### Searching algorithms
+    - [Binary search](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/BINARY_SEARCH.cpp)
+    - [Knuth-Morris-Pratt algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/KNUTH_MORRIS_PRATT_ALGORITHM.cpp)
+    - [Rabin-Karp algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/RABIN_KARP_ALGORITHM.cpp)
+
 - #### Graph algorithms
+    - [Breadth-first search](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/BREADTH_FIRST_SEARCH.cpp)
+    - [Depth-first search](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/DEPTH_FIRST_SEARCH.cpp)
+    - [Topological sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/TOPOLOGICAL_SORT.cpp)
+    - [Dijkstra's algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/DIJKSTRA.cpp)
+    - [Floyd–Warshall algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/FLOYD_WARSHALL.cpp)
+    - [Kruskal's algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/[WIP]%20KRUSKAL.cpp) [WIP]
+
 - #### Cryptography algorithms
+    - [Rivest–Shamir–Adleman (RSA) cryptosystem]()
+
 - #### Geometric algorithms
+    - [Welzl's algorithm (smallest-circle problem)]()
