@@ -1,22 +1,21 @@
 
 /* Problem: Smallest Enclosing Circle*/
 
-#pragma once
 #include <random>
 #include "Elements/Circle.h"
 
-void shuffle(Point *P, int index) {
+void shuffle(std::vector<Point> &P, int index) {
   for(int i = 0; i < index; i++) {
     size_t j = static_cast<double>(rand() % index);
     swap(P[i],P[j]);
   }
 }
 
-Circle WelzlAlgorithm(Point *P, size_t n) {
+Circle WelzlAlgorithm(std::vector<Point> &P) {
 
   Circle c; c.construct_circle_by_two_points(P[0],P[1]);
 
-  for(int i=2; i < n; i++) {
+  for(int i=2; i < P.size(); i++) {
     if(!c.is_point_inside(P[i])) {
       shuffle(P,i);
       c.construct_circle_by_two_points(P[i],P[0]);
