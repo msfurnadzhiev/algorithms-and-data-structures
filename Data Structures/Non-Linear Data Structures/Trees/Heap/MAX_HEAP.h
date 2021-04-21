@@ -25,7 +25,7 @@ public:
         }
         if(largest != index) {
             swap(heap[index], heap[largest]);
-            MIN_HEAPIFY(largest);
+            MAX_HEAPIFY(largest);
         }
     }
 
