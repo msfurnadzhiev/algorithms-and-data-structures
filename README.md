@@ -1,32 +1,77 @@
-# Implementation of some algorithms and data structures
+# Algorithms and Data Structures
 ### Algorithms
-- #### Sorthing algorithms
-    - [Selection sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/SELECTION_SORT.cpp)
-    - [Insertion sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/INSERTION_SORT.cpp)
-    - [Merge sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/MERGE_SORT.cpp)
-    - [Heap sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/HEAP_SORT.cpp)
-    - [Quick sort with Hoare's partition scheme](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/QUICK_SORT_PARTITION_HOARE.cpp)
-    - [Quick sort with Lomutos's partition scheme](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/QUICK_SORT_PARTITION_LOMUTO.cpp)
-    - [Shell sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/SHELL_SORT.cpp)
-    - [Counting sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/COUNTING_SORT.cpp)
-    - [Bucket sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/BUCKET_SORT.cpp)
-    - [External Sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/[WIP]%20External%20Sort) [WIP]
+<details>
+    <summary>Sorthing Algorithms</summary>
+    <ul>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/SELECTION_SORT.cpp">Selecting sort</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/INSERTION_SORT.cpp">Insertion sort</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/MERGE_SORT.cpp">Merge sort</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/HEAP_SORT.cpp">Heap sort</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/">Quick sort</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/COUNTING_SORT.cpp">Counting sort</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Sorting%20Algorithms/BUCKET_SORT.cpp">Bucket sort</a> </li>
+    </ul>
+</details>
 
-- #### Searching algorithms
-    - [Binary search](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/BINARY_SEARCH.cpp)
-    - [Knuth-Morris-Pratt algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/KNUTH_MORRIS_PRATT_ALGORITHM.cpp)
-    - [Rabin-Karp algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/RABIN_KARP_ALGORITHM.cpp)
+<details>
+    <summary>Searching Algorithms</summary>
+    <ul>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/BINARY_SEARCH.cpp">Binary search</a> </li>
+        <li> <a href="">Interpolation search</a> </li>
+        <li> <a href="">String-Searching</a> </li>
+        <ul>
+            <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/RABIN_KARP_ALGORITHM.cpp">Rabin-Karp algorithm</a> </li>
+            <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/KNUTH_MORRIS_PRATT_ALGORITHM.cpp">Knuth-Morris-Pratt algorithm</a> </li>
+            <li> <a href="">Boyer-Moore algorithm</a> </li>
+        </ul>
+    </ul>
+</details>
 
-- #### Graph algorithms
-    - [Breadth-first search](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/BREADTH_FIRST_SEARCH.cpp)
-    - [Depth-first search](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/DEPTH_FIRST_SEARCH.cpp)
-    - [Topological sort](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/TOPOLOGICAL_SORT.cpp)
-    - [Dijkstra's algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/DIJKSTRA.cpp)
-    - [Floyd–Warshall algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/FLOYD_WARSHALL.cpp)
-    - [Kruskal's algorithm](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/[WIP]%20KRUSKAL.cpp) [WIP]
 
-- #### Cryptography algorithms
-    - [Rivest–Shamir–Adleman (RSA) cryptosystem](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Cryptography%20Algorithms/RSA.py)
+<details>
+    <summary>Graph Algorithms</summary>
+    <ul>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/BREADTH_FIRST_SEARCH.cpp">Breadth-first search</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/DEPTH_FIRST_SEARCH.cpp">Depth-first search</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/TOPOLOGICAL_SORT.cpp">Topological sort</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/DIJKSTRA.cpp">Dijkstra's algorithm</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Graph%20Algorithms/FLOYD_WARSHALL.cpp">Floyd–Warshall algorithm</a> </li>
+        <li> Kruskal's algorithm </li>
+    </ul>
+</details>
 
-- #### Geometric algorithms
-    - [Welzl's algorithm (smallest-circle problem)](https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Geometric%20Algorithms/WelzlAlgorithm.cpp)
+<details>
+    <summary>Coding and Cryptography Algorithms</summary>
+    <ul>
+        <li> Huffman coding </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Cryptography%20Algorithms/RSA.py">Rivest–Shamir–Adleman (RSA) cryptosystem</a> </li>
+    </ul>
+</details>
+
+<details>
+    <summary>Geometric Algorithms</summary>
+    <ul>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Geometric%20Algorithms/WelzlAlgorithm.cpp">Welzl's algorithm (smallest-circle problem)</a> </li>
+    </ul>
+</details>
+
+<br/>
+
+### Data Structures
+<details>
+    <summary>Trees</summary>
+    <ul>
+        <li>Binary Search Trees</li>
+            <ul>
+                <li> AVL Tree </li>
+                <li> Red-Black Tree </li>
+                <li> Splay Tree </li>
+            </ul>
+        <li>Heaps</li>
+            <ul>
+                <li> Binary Heap </li>
+                <li> Binomial Heap </li>
+                <li> Fibonacci Heap  </li>
+            </ul>   
+    </ul>
+</details>
