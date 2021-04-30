@@ -16,13 +16,13 @@
 <details>
     <summary>Searching Algorithms</summary>
     <ul>
-        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/BINARY_SEARCH.cpp">Binary search</a> </li>
-        <li> <a href="">Interpolation search</a> </li>
-        <li> <a href="">String-Searching</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/binary_search.py">Binary search</a> </li>
+        <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/interpolation_search.py">Interpolation search</a> </li>
+        <li> String-Searching </li>
         <ul>
             <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/RABIN_KARP_ALGORITHM.cpp">Rabin-Karp algorithm</a> </li>
             <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/KNUTH_MORRIS_PRATT_ALGORITHM.cpp">Knuth-Morris-Pratt algorithm</a> </li>
-            <li> <a href="">Boyer-Moore algorithm</a> </li>
+            <li> Boyer-Moore algorithm </li>
         </ul>
     </ul>
 </details>
