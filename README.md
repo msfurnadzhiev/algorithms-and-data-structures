@@ -22,7 +22,7 @@
         <ul>
             <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/RABIN_KARP_ALGORITHM.cpp">Rabin-Karp algorithm</a> </li>
             <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/KNUTH_MORRIS_PRATT_ALGORITHM.cpp">Knuth-Morris-Pratt algorithm</a> </li>
-            <li> Boyer-Moore algorithm </li>
+            <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Algorithms/Searching%20Algorithms/boyer_moore.py" > Boyer-Moore algorithm </a> </li>
         </ul>
     </ul>
 </details>
