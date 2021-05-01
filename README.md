@@ -69,8 +69,8 @@
             </ul>
         <li>Heaps</li>
             <ul>
-                <li> Binary Heap </li>
-                <li> Binomial Heap </li>
+                <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Data%20Structures/Non-Linear%20Data%20Structures/Trees/Heap/binary_heap.py"> Binary Heap </a> </li>
+                <li> <a href="https://github.com/msfurnadzhiev/algorithms_and_data_structures/blob/master/Data%20Structures/Non-Linear%20Data%20Structures/Trees/Heap/binomial_heap.py"> Binomial Heap </a> </li>
                 <li> Fibonacci Heap  </li>
             </ul>   
     </ul>
